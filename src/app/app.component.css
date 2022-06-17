@@ -1,0 +1,91 @@
+.formUser {
+    margin: 0 auto;
+    width: 900px;
+}
+
+.user {
+    display: flex;
+    justify-content: space-between;
+}
+
+.key {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    font-weight: bolder;
+    color: gray;
+}
+
+.data {
+    border: none;
+    border-bottom: 1px solid rgb(222, 219, 219);
+    ;
+    padding: 5px;
+    margin: 5px 0 10px 0;
+}
+
+.data:hover {
+    background-color: rgb(242, 240, 240);
+}
+
+.data:focus-visible {
+    outline: none;
+}
+
+.remove{
+    color: red;
+}
+.remove, .add, .submit {
+    height: 25px;
+    margin-top: 25px;
+    border-radius: 15px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    background: white;
+    border: 1px solid;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.remove:hover {
+    color: white;
+    background-color: red;
+    transition: 0.5s;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.add{
+    color: green;
+}
+
+.add:hover{
+    color: white;
+    background-color: green;
+    transition: 0.5s;
+}
+
+.submit{
+    color: gold;
+}
+
+.submit:hover{
+    color: white;
+    background-color: gold;
+    transition: 0.5s;
+}
+
+.errore{
+    color: red;
+    width: 170px;
+}
+
+.succes{
+    display: block;
+    margin: 0 auto;
+    color: green;
+}
