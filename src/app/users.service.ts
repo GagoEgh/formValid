@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { debounceTime, map, Observable } from 'rxjs';
 import { UserEmailModel } from './models/userEmailModel';
 
 @Injectable({
@@ -12,7 +12,11 @@ export class UsersService {
     private http: HttpClient
   ) { }
 
-  public getUsersEmail():Observable<UserEmailModel[]> {
+  public getUsersEmail(): Observable<UserEmailModel[]> {
     return this.http.get<UserEmailModel[]>('https://my-json-server.typicode.com/AshotAleqs/exams/emails')
+  }
+
+  public hasUsersEmail(email: string): Observable<UserEmailModel[]>  {
+    return this.http.get<UserEmailModel[]>(`https://my-json-server.typicode.com/AshotAleqs/exams/emails/${email}`)
   }
 }

@@ -61,6 +61,9 @@
             <p class="errore" *ngIf="users.controls[i].get('email')?.hasError('email')">
               Write the e-mail correctly
             </p>
+            <p class="errore" *ngIf="users.controls[i].get('email')?.hasError('hasEmail')">
+              Email Adress is already in use
+            </p>
           </ng-container>
         </div>
         <button (click)="removeUser(i)" class="remove" type="button">remove</button>
