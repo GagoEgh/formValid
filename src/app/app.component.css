@@ -1,5 +1,5 @@
 .formUser {
-    margin: 0 auto;
+    margin: 40px auto;
     width: 900px;
 }
 
@@ -18,7 +18,6 @@
 .data {
     border: none;
     border-bottom: 1px solid rgb(222, 219, 219);
-    ;
     padding: 5px;
     margin: 5px 0 10px 0;
 }
@@ -70,12 +69,13 @@
 }
 
 .submit{
-    color: gold;
+    color: white;
+    background: gold;
 }
 
 .submit:hover{
-    color: white;
-    background-color: gold;
+    color: gold;
+    background-color: white;
     transition: 0.5s;
 }
 
@@ -88,4 +88,8 @@
     display: block;
     margin: 0 auto;
     color: green;
+}
+
+.invalidForm{
+    opacity: 0.3;
 }

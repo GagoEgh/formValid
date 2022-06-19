@@ -1,5 +1,4 @@
 <form [formGroup]="usersForm" (ngSubmit)="onSubmit()" class="formUser">
-
   <div formArrayName="users">
     <div *ngFor="let user of users.controls; let i=index">
       <div [formGroupName]="i" class="user">
@@ -17,8 +16,6 @@
               {{users.controls[i].get('firstName')?.errors?.['minlength'].requiredLength}}
             </p>
           </ng-container>
-
-
         </div>
         <div>
           <div class="key">lastName</div>
@@ -66,15 +63,21 @@
             </p>
           </ng-container>
         </div>
-        <button (click)="removeUser(i)" class="remove" type="button">remove</button>
+        <button [hidden]="i===0"
+        (click)="removeUser(i)" class="remove" type="button">remove</button>
       </div>
     </div>
 
   </div>
   <div class="btns">
     <button type="button" (click)="addUser()" class="add">Add</button>
-    <button type="submit" class="submit">Submit</button>
+    <button 
+      [class.invalidForm]="usersForm.invalid"
+      type="submit" 
+      class="submit" 
+      [disabled]="usersForm.invalid">Submit</button>
   </div>
-  
+ 
 </form>
-<h1 *ngIf="isOk" class="succes">SUCCES</h1>
+
+<app-users-table></app-users-table>

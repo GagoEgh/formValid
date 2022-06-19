@@ -1,0 +1,27 @@
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>option</th> 
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="tr" *ngFor="let user of usersData">
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.age}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <button type="button" class="btn" (click)="delete(user)">
+                        delete
+                    </button>
+                      
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

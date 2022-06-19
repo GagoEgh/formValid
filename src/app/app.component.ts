@@ -1,9 +1,8 @@
-import { Component, Injectable, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { debounceTime, map, Observable, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidatorsService } from './custom-validators.service';
-import { UserEmailModel } from './models/userEmailModel';
 import { UsersService } from './users.service';
+
 
 @Component({
   selector: 'app-root',
@@ -12,29 +11,21 @@ import { UsersService } from './users.service';
 })
 export class AppComponent implements OnInit {
   usersForm!: FormGroup;
-  userEmail!: UserEmailModel[];
-  isOk = false;
+
   constructor(
     private fb: FormBuilder,
-    private customValidators:CustomValidatorsService 
+    private customValidators: CustomValidatorsService,
+    private usersService: UsersService
   ) { }
 
   ngOnInit(): void {
     this.inintUsersForm();
-    setTimeout(() => {
-      console.log(this.usersForm.get('users'))
-    }, 400)
   }
 
   inintUsersForm() {
     this.usersForm = this.fb.group({
       users: this.fb.array([
-        this.fb.group({
-          firstName: ['', [Validators.required, Validators.minLength(3)]],
-          lastName: ['', [Validators.required, Validators.minLength(3)]],
-          age: ['', [Validators.required, Validators.min(6)]],
-          email: ['', [Validators.required, Validators.email], [this.customValidators.hasEmail.bind(this.customValidators)]],
-        })
+        this.newUser()
       ]),
     });
   }
@@ -48,7 +39,7 @@ export class AppComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.minLength(3)]],
       age: ['', [Validators.required, Validators.min(6)]],
-      email: ['', [Validators.required, Validators.email], [this.customValidators.hasEmail.bind(this.customValidators)]],
+      email: ['', [Validators.required, Validators.email], [this.customValidators.hasEmail.bind(this)]],
     })
   }
 
@@ -57,18 +48,21 @@ export class AppComponent implements OnInit {
   }
 
   removeUser(index: number) {
-    if (index === 0) {
-      return
-    }
     this.users.removeAt(index)
   }
-  
-  onSubmit() {
 
+  onSubmit() {
     if (this.usersForm.invalid) {
+      console.log('submit')
       return
     }
-    this.isOk = true
+   
+    for (let item = 0; item < this.users.value.length; item++) {
+      this.users.value[item].id = new Date().getTime();
+      this.usersService.usersDto.push(this.users.value[item]);
+    }
+    this.usersForm.reset()
   }
+
 
 }
